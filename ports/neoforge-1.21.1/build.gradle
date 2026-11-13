@@ -1,0 +1,37 @@
+// BeezzKeys for Minecraft 1.21.1 on NeoForge. The sources are generated from ../../src by ../gen.py; do not edit src/ here.
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = project.mod_version + "+" + project.minecraft_version + "-neoforge"
+group = "land.beezz"
+base { archivesName = "beezzkeys" }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// one source set: the client code, the resources and the NeoForge entry point
+sourceSets.main.java.srcDirs = ["src/client/java"]
+sourceSets.main.resources.srcDirs = ["src/client/resources", "src/main/resources"]
+
+neoForge {
+    version = project.neo_version
+    runs {
+        // ./gradlew runSelftest: opens the keyboard, clicks through it, saves run/screenshots/beezzkeys_selftest_*.png,
+        // closes the game; the log says "BeezzKeys selftest: OK"
+        selftest {
+            client()
+            systemProperty 'beezzkeys.selftest', 'true'
+        }
+    }
+    mods {
+        beezzkeys { sourceSet sourceSets.main }
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("META-INF/neoforge.mods.toml") { expand "version": project.mod_version }
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = "UTF-8" }

@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "land.beezz.keys.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "beezzkeys.refmap.json",
+  "client": ["KeyboardHandlerMixin", "OptionsSubScreenAccessor"],
+  "injectors": { "defaultRequire": 1 }
+}

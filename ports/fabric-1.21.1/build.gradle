@@ -1,0 +1,48 @@
+// BeezzKeys for Minecraft 1.21.1 (Fabric). The sources are generated from ../../src by ../gen.py; do not edit src/ here.
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version '1.18.4'
+}
+
+version = project.mod_version + "+" + project.minecraft_version
+group = project.maven_group
+base { archivesName = project.archives_base_name }
+
+loom {
+    splitEnvironmentSourceSets()
+    mods {
+        "beezzkeys" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") { expand "version": project.version, "minecraft_version": project.minecraft_version }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release = 21
+}
+
+// no client game tests before 1.21.4: ./gradlew runSelftest opens the keyboard, clicks through it, saves screenshots
+// to run/screenshots/beezzkeys_selftest_*.png and closes the game; the log says "BeezzKeys selftest: OK"
+loom {
+    runs {
+        selftest {
+            client()
+            name = "Selftest"
+            vmArg "-Dbeezzkeys.selftest=true"
+            runDir "run"
+        }
+    }
+}

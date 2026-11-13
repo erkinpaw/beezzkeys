@@ -1,8 +1,8 @@
 # BeezzKeys
 
-A Minecraft mod that turns the Key Binds screen into a drawn keyboard: you see at a glance which keys are taken, which are free and where two actions clash. Client-side, Fabric, Minecraft 26.1 – 26.3.
+A Minecraft mod that turns the Key Binds screen into a drawn keyboard: you see at a glance which keys are taken, which are free and where two actions clash. Client-side. Fabric: Minecraft 26.1 – 26.3, 1.21.11, 1.21.1, 1.20.1. NeoForge: 1.21.1. Forge: 1.20.1.
 
-Мод для Minecraft, который превращает «Назначение клавиш» в нарисованную клавиатуру: сразу видно, какие клавиши заняты, какие свободны и где конфликты. Только клиент, Fabric, Minecraft 26.1 – 26.3. [Описание на русском ниже](#по-русски).
+Мод для Minecraft, который превращает «Назначение клавиш» в нарисованную клавиатуру: сразу видно, какие клавиши заняты, какие свободны и где конфликты. Только клиент. Fabric: Minecraft 26.1 – 26.3, 1.21.11, 1.21.1, 1.20.1. NeoForge: 1.21.1. Forge: 1.20.1. [Описание на русском ниже](#по-русски).
 
 ![The keyboard: used keys take the colour of their category, free keys are grey](docs/keyboard.png)
 
@@ -24,8 +24,15 @@ A Minecraft mod that turns the Key Binds screen into a drawn keyboard: you see a
 
 ## Install
 
-1. Install [Fabric Loader](https://fabricmc.net/use/) and [Fabric API](https://modrinth.com/mod/fabric-api) for your game version.
-2. Take the jar for your game version from [Releases](../../releases) and put it into the `mods` folder.
+1. Install the loader for your game version: [Fabric Loader](https://fabricmc.net/use/) with [Fabric API](https://modrinth.com/mod/fabric-api), [NeoForge](https://neoforged.net/) or [Forge](https://files.minecraftforge.net/).
+2. Take the jar for your game version and loader from [Releases](../../releases) and put it into the `mods` folder.
+
+| Game | Fabric | NeoForge | Forge |
+|---|---|---|---|
+| 26.1 – 26.3 | yes | | |
+| 1.21.11 | yes | | |
+| 1.21 – 1.21.1 | yes | yes | |
+| 1.20.1 | yes | | yes |
 3. Open Options → Controls → Key Binds.
 
 The mod is only needed on the client. It works on any server and in single player.
@@ -48,6 +55,8 @@ JDK 25 is needed.
 ./gradlew jar -Pminecraft_version=26.1.2 -Pfabric_version=0.155.3+26.1.2     # 26.1
 ```
 
+Other game versions and loaders are generated from the same code: see [ports/README.md](ports/README.md).
+
 `./gradlew runClientGameTest` starts a real client, clicks through the screen and saves screenshots to `build/run/clientGameTest/screenshots`. What differs between game versions lives in `src/compat`.
 
 ## По-русски
@@ -62,7 +71,7 @@ JDK 25 is needed.
 - **Категории.** «+» под клавиатурой выбирает, какие категории показывать в списке. Сама клавиатура всегда показывает всё.
 - **Шестерёнка.** Наборы раскладок (сохранить, загрузить, передать файлом), переключатель цифрового блока, отмена (Ctrl+Z) и обычный список Minecraft.
 
-**Установка:** поставьте Fabric Loader и Fabric API под свою версию игры, скачайте jar под неё из [Releases](../../releases) и положите в папку `mods`. Мод нужен только на клиенте.
+**Установка:** поставьте под свою версию игры Fabric Loader с Fabric API, NeoForge или Forge, скачайте jar под версию и загрузчик из [Releases](../../releases) и положите в папку `mods`. Мод нужен только на клиенте.
 
 **Что стоит знать:** в самом Minecraft сочетаний клавиш для действий нет, поэтому Ctrl / Shift / Alt работают только для своих команд. Команда на обычной клавише не отменяет действие игры на ней — сработают оба. На некоторых серверах макросы запрещены: сверьтесь с правилами.
 

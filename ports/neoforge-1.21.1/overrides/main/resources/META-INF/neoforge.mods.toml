@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/erkinpaw/beezzkeys/issues"
+
+[[mods]]
+modId = "beezzkeys"
+version = "${version}"
+displayName = "BeezzKeys"
+authors = "BeezzLand"
+displayURL = "https://github.com/erkinpaw/beezzkeys"
+description = '''Key binds as a drawn keyboard: used keys take the colour of their category, free keys are grey, conflicts are red.'''
+
+[[mixins]]
+config = "beezzkeys.client.mixins.json"
+
+[[dependencies.beezzkeys]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.beezzkeys]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "CLIENT"
