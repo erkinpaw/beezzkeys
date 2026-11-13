@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "beezzkeys",
+  "version": "${version}",
+  "name": "BeezzKeys",
+  "description": "Наглядная схема клавиатуры в настройках управления: видно, какие клавиши заняты, какие свободны и где конфликты.",
+  "authors": [
+    "BeezzLand"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "land.beezz.keys.BeezzKeys"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": "~${minecraft_version}",
+    "fabric-api": "*"
+  },
+  "mixins": [
+    {
+      "config": "beezzkeys.client.mixins.json",
+      "environment": "client"
+    }
+  ]
+}

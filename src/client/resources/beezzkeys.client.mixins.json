@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "land.beezz.keys.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": ["KeyboardHandlerMixin", "OptionsSubScreenAccessor"],
+  "injectors": { "defaultRequire": 1 }
+}

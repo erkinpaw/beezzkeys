@@ -1,0 +1,49 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.18.4'
+}
+
+version = project.mod_version + "+" + project.minecraft_version.tokenize(".").take(2).join(".")
+group = project.maven_group
+base { archivesName = project.archives_base_name }
+
+loom {
+    splitEnvironmentSourceSets()
+    mods {
+        "beezzkeys" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    filesMatching("fabric.mod.json") { expand "version": project.version, "minecraft_version": project.minecraft_version.tokenize(".").take(2).join(".") }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    it.options.release = 25
+}
+
+// ./gradlew runClientGameTest opens the screen in a real client, clicks through it and saves screenshots
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "beezzkeys-test"
+        enableGameTests = false
+        enableClientGameTests = true
+        eula = true
+    }
+}
+
+// the input code changed with 26.3, the screen holder with 26.2: see src/compat
+def mcMinor = project.minecraft_version.tokenize('.')[1].toInteger()
+sourceSets.client.java.srcDir "src/compat/${mcMinor >= 3 ? 'sdl' : mcMinor == 2 ? 'glfw-gui' : 'glfw'}"
