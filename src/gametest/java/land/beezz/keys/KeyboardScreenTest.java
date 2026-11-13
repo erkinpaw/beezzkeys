@@ -20,6 +20,8 @@ import java.util.List;
  */
 public class KeyboardScreenTest implements FabricClientGameTest {
     private static final int LEFT = InputConstants.MOUSE_BUTTON_LEFT, RIGHT = InputConstants.MOUSE_BUTTON_RIGHT;
+    /** The game language of the run: BEEZZKEYS_LANG=en_us gives English screenshots. */
+    private static final String LANG = System.getenv().getOrDefault("BEEZZKEYS_LANG", "ru_ru");
     private ClientGameTestContext ctx;
 
     private static Object field(Object o, String name) {
@@ -112,8 +114,8 @@ public class KeyboardScreenTest implements FabricClientGameTest {
         this.ctx = ctx;
         ctx.getInput().resizeWindow(1920, 1080);
         ctx.runOnClient(mc -> {
-            mc.options.languageCode = "ru_ru";
-            mc.getLanguageManager().setSelected("ru_ru");
+            mc.options.languageCode = LANG;
+            mc.getLanguageManager().setSelected(LANG);
             mc.options.guiScale().set(3);
             mc.resizeGui();
         });
@@ -242,7 +244,7 @@ public class KeyboardScreenTest implements FabricClientGameTest {
         shot("keys_16_french");
         language("en_us");
         shot("keys_17_english");
-        language("ru_ru");
+        language(LANG);
         ctx.runOnClient(mc -> {
             mc.options.guiScale().set(4);
             mc.resizeGui();
